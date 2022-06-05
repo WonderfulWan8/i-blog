@@ -180,6 +180,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
 var _hot = __webpack_require__(/*! api/hot */ 21);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 {
   data: function data() {
@@ -193,6 +197,9 @@ var _hot = __webpack_require__(/*! api/hot */ 21);function _interopRequireDefaul
                   (0, _hot.getHotTabs)());case 2:_yield$getHotTabs = _context.sent;res = _yield$getHotTabs.data; // res = 返回值.data
                 _this.tabData = res.list;
                 console.log("this.tabData:", _this.tabData);case 6:case "end":return _context.stop();}}}, _callee);}))();
+    },
+    test: function test(text, index) {
+      console.log("loadindex:", index);
     } },
 
   components: {},

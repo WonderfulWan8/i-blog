@@ -68,25 +68,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/uniapp/i-blog/components/my-tabs/my-tabs.vue?vue&type=template&id=4d630804&scoped=true& ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-}
-var recyclableRender = false
-var staticRenderFns = []
-render._withStripped = true
-
-
+throw new Error("Module build failed (from ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js):\nSyntaxError: Unexpected token, expected \",\" (3:4)\n    at Parser._raise (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:746:17)\n    at Parser.raiseWithData (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:739:17)\n    at Parser.raise (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:733:17)\n    at Parser.unexpected (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:8807:16)\n    at Parser.expect (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:8793:28)\n    at Parser.parseObj (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:10439:14)\n    at Parser.parseExprAtom (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:10055:28)\n    at Parser.parseExprSubscripts (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9656:23)\n    at Parser.parseMaybeUnary (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9636:21)\n    at Parser.parseExprOps (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9506:23)\n    at Parser.parseMaybeConditional (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9479:23)\n    at Parser.parseMaybeAssign (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9434:21)\n    at Parser.parseParenAndDistinguishExpression (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:10267:28)\n    at Parser.parseExprAtom (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:10007:21)\n    at Parser.parseExprSubscripts (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9656:23)\n    at Parser.parseMaybeUnary (D:\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9636:21)");
 
 /***/ }),
 
@@ -142,11 +126,36 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default2 =
 {
   name: "my-tabs",
   data: function data() {
-    return {};
+    return {
+      // 内部维护的数据对象，为每个item单独维护一个slider的滑块对象
+      tabList: [],
+      activeIndex: -1,
+      // 滑块距离左侧距离
+      slider: {
+        // 1.确定滚动时机:点击tab时
+        // 2.计算滑块滚动距离
+        left: 0 },
+
+      defaultConfig: {
+        underLineWidth: 24,
+        underLineHeight: 2,
+        underLineColor: '#f94d2a' } };
 
 
   },
@@ -171,7 +180,46 @@ var _default2 =
     // 3.在父组件中指定选中项
     defaultIndex: {
       type: Number,
-      default: 0 } } };exports.default = _default2;
+      default: 0 } },
+
+
+  methods: {
+    // 更新tab的宽度
+    updateTabWidth: function updateTabWidth() {
+
+    },
+    onTabClick: function onTabClick(index) {
+      console.log(index);
+      this.activeIndex = index;
+      this.$emit('tabClick', index);
+    },
+    // 计算滑块滚动位置
+    tabToIndex: function tabToIndex() {
+      var index = this.activeIndex;
+      this.slider = {
+        left: 0 };
+
+    } },
+
+  watch: {
+    // 监听父组件传值
+    defaultIndex: {
+      // 当defaultIndex发生变化时，回调的方法
+      handler: function handler(val) {
+        this.activeIndex = val;
+      },
+      // 侦听后立即执行
+      immediate: true },
+
+    // 监听tableData变化
+    tabData: {
+      handler: function handler(val) {
+        this.tabList = val;
+        // this.$nextTick()存在兼容性问题
+        setTimeout(function () {
+          // 计算item的slider
+        }, 0);
+      } } } };exports.default = _default2;
 
 /***/ }),
 

@@ -6,7 +6,11 @@
 			<my-search placeholderText="uni-1app 自定义搜索组件"></my-search>
 		</view>
 		 <!-- tabs -->
-		<my-tabs :tabData="tabData">
+		<my-tabs 
+		:tabData="tabData"
+		:defaultIndex="0"
+		@tabClick="test('',index)"
+		>
 			<!-- 
 				vue :tabData="tabData"
 				小程序 data-tableData="{{tabData}}"
@@ -29,6 +33,9 @@ import { getHotTabs } from 'api/hot'
 				const { data:res } = await getHotTabs();// res = 返回值.data
 				this.tabData = res.list;
 				console.log("this.tabData:",this.tabData);
+			},
+			test(text,index){
+				console.log("loadindex:",index);
 			}
 		},
 		components:{
