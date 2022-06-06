@@ -9586,14 +9586,28 @@ if (hadRuntime) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getHotTabs = getHotTabs;var _request = _interopRequireDefault(__webpack_require__(/*! ../utils/request.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.getHotTabs = getHotTabs;exports.getHotListFormTabType = getHotListFormTabType;var _request = _interopRequireDefault(__webpack_require__(/*! ../utils/request.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /**
-                                                                                                                                                                                                                                                                                * 热搜文章类型
-                                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                                                                      * 热搜文章类型
+                                                                                                                                                                                                                                                                                                                                      */
 function getHotTabs() {
   return (0, _request.default)({
     url: '/hot/tabs' });
+
+}
+
+/**
+   * 热搜文章列表
+   * @param{*} type
+   * @returns
+   */
+function getHotListFormTabType(type) {
+  return (0, _request.default)({
+    url: '/hot/list',
+    data: {
+      type: type } });
+
 
 }
 

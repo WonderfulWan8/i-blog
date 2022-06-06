@@ -8,23 +8,36 @@
 		 <!-- tabs -->
 		<my-tabs 
 		:tabData="tabData"
-		:defaultIndex="0"
-		:config="{textColor:'#00ff00'}">
-		<!-- ,activeTextColor:"#ff00ff" -->
+		:defaultIndex="currentIndex"
+		@tabClick="onTabClick"
+		>
+		<!-- :config="{textColor:'#00ff00',activeTextColor:'#ff00ff'}" -->
 			<!-- 
 				vue :tabData="tabData"
 				小程序 data-tableData="{{tabData}}"
 			 -->
 		</my-tabs>
+		<view>
+			<uni-load-more status="loading" v-if="isLoading"/>
+			<!-- list视图 -->
+			<!-- 1.使用mock数据，构建List组件的基本结构 2.美化样式 3.根据tab切换获取真实数据 
+			4.渲染真实数据 5.让list具有左右切换的能力 6.完成list与tabs联动的能力 -->
+			<block v-else>
+				<hot-list-item v-for="(item, index) in 50" :key="index"></hot-list-item>
+			</block>
+		</view>
 	</view>
 </template>
 
 <script>
-import { getHotTabs } from 'api/hot'
+import { getHotTabs, getHotListFormTabType } from 'api/hot'
 	export default {
 		data() {
 			return {
-				tabData: {},
+				tabData: [],
+				currentIndex: 0,//激活项
+				isLoading: true,
+				listData:[],
 			};
 		},
 		methods:{
@@ -32,15 +45,32 @@ import { getHotTabs } from 'api/hot'
 			async loadHotTabs(){
 				const { data:res } = await getHotTabs();// res = 返回值.data
 				this.tabData = res.list;
-				// console.log("this.tabData:",this.tabData);
+				// 获取list后再执行，需要tab中的id
+				this.loadHotListFormTab();
+			},
+			// 获取 list列表数据,进入页面时调用,点击切换tab时调用
+			async loadHotListFormTab(){
+				console.log("1234");
+				if(!this.listData[this.currentIndex]){
+					this.isLoading = true;
+					const id = this.tabData[this.currentIndex].id;
+					const { data: res } = await getHotListFormTabType(id);// res = 返回值.data
+					this.listData[this.currentIndex] = res.list;
+					this.isLoading = false;
+				} 
 			},
 			test(text,index){
 				// console.log("loadindex:",index);
-			}
+			},
+			onTabClick(index){ 
+				this.currentIndex = index;
+				this.loadHotListFormTab();
+			},
 		},
 		components:{
 			
 		},
+		
 		created(){
 			// 组件实现配置，dom未加载
 			this.loadHotTabs();

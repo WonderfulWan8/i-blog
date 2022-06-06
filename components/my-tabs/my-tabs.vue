@@ -98,7 +98,7 @@
 			updateTabWidth(){
 				let data = this.tabList;
 				if(data.length === 0){
-					return;
+					return false;
 				}
 				// 在uni中获取dom
 				const query = uni.createSelectorQuery().in(this);
@@ -120,9 +120,9 @@
 				});                                                               
 			},
 			onTabClick(index){
-				// console.log(index)	
+				// console.log(index)
 				this.activeIndex = index;
-				this.tabToIndex();  
+				this.tabToIndex();
 				this.$emit('tabClick',index)
 			},
 			// 计算滑块滚动位置

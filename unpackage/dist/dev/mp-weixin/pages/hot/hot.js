@@ -104,10 +104,13 @@ var components
 try {
   components = {
     mySearch: function() {
-      return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 44))
+      return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 37))
     },
     myTabs: function() {
-      return __webpack_require__.e(/*! import() | components/my-tabs/my-tabs */ "components/my-tabs/my-tabs").then(__webpack_require__.bind(null, /*! @/components/my-tabs/my-tabs.vue */ 47))
+      return __webpack_require__.e(/*! import() | components/my-tabs/my-tabs */ "components/my-tabs/my-tabs").then(__webpack_require__.bind(null, /*! @/components/my-tabs/my-tabs.vue */ 44))
+    },
+    hotListItem: function() {
+      return __webpack_require__.e(/*! import() | components/hot-list-item/hot-list-item */ "components/hot-list-item/hot-list-item").then(__webpack_require__.bind(null, /*! @/components/hot-list-item/hot-list-item.vue */ 51))
     }
   }
 } catch (e) {
@@ -184,11 +187,24 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
 var _hot = __webpack_require__(/*! api/hot */ 21);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 {
   data: function data() {
     return {
-      tabData: {} };
+      tabData: [],
+      currentIndex: 0, //激活项
+      isLoading: true,
+      listData: [] };
 
   },
   methods: {
@@ -196,13 +212,30 @@ var _hot = __webpack_require__(/*! api/hot */ 21);function _interopRequireDefaul
     loadHotTabs: function loadHotTabs() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$getHotTabs, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   (0, _hot.getHotTabs)());case 2:_yield$getHotTabs = _context.sent;res = _yield$getHotTabs.data; // res = 返回值.data
                 _this.tabData = res.list;
-                // console.log("this.tabData:",this.tabData);
-              case 5:case "end":return _context.stop();}}}, _callee);}))();},
+                // 获取list后再执行，需要tab中的id
+                _this.loadHotListFormTab();case 6:case "end":return _context.stop();}}}, _callee);}))();
+    },
+    // 获取 list列表数据,进入页面时调用,点击切换tab时调用
+    loadHotListFormTab: function loadHotListFormTab() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var id, _yield$getHotListForm, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                console.log("1234");if (
+                _this2.listData[_this2.currentIndex]) {_context2.next = 10;break;}
+                _this2.isLoading = true;
+                id = _this2.tabData[_this2.currentIndex].id;_context2.next = 6;return (
+                  (0, _hot.getHotListFormTabType)(id));case 6:_yield$getHotListForm = _context2.sent;res = _yield$getHotListForm.data; // res = 返回值.data
+                _this2.listData[_this2.currentIndex] = res.list;
+                _this2.isLoading = false;case 10:case "end":return _context2.stop();}}}, _callee2);}))();
+
+    },
     test: function test(text, index) {
       // console.log("loadindex:",index);
+    },
+    onTabClick: function onTabClick(index) {
+      this.currentIndex = index;
+      this.loadHotListFormTab();
     } },
 
   components: {},
+
 
 
   created: function created() {
