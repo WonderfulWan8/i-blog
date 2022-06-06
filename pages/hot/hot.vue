@@ -9,8 +9,8 @@
 		<my-tabs 
 		:tabData="tabData"
 		:defaultIndex="0"
-		@tabClick="test('',index)"
-		>
+		:config="{textColor:'#00ff00'}">
+		<!-- ,activeTextColor:"#ff00ff" -->
 			<!-- 
 				vue :tabData="tabData"
 				小程序 data-tableData="{{tabData}}"

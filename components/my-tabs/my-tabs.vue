@@ -11,6 +11,7 @@
 			class="scoll-view"
 			scroll-x
 			scroll-with-animation
+			:scroll-left="scrollLeft"
 			>
 				<view class="scoll-content">
 					<view class="tab-item-box">
@@ -20,21 +21,24 @@
 							@click="onTabClick(index)" 
 							class="tab-item"
 							:class="{'tab-item-active' : activeIndex === index }"
-							>
+							:style="{
+								color: activeIndex === index ? defaultConfig.activeTextColor : defaultConfig.textColor
+							}"
+							>	
 								{{item.label || item}}
 							</view>
 						</block>
 					</view>
-				</view>
-				<!-- 滑块 -->
-				<view class="underline" 
-				:style="{
-					transform: 'translateX('+ slider.left +'px)',
-					width: defaultConfig.underLineWidth+'px',
-					height: defaultConfig.underLineHeight+'px',
-					backgroundColor: defaultConfig.underLineColor
-				}">
-					
+					<!-- 滑块 -->
+					<view class="underline" 
+					:style="{
+						transform: 'translateX('+ slider.left +'px)',
+						width: defaultConfig.underLin+'px',
+						height: defaultConfig.underLineHeigh+'px',
+						backgroundColor: defaultConfig.underLineColor
+					}"
+					>
+					</view>
 				</view>
 			</scroll-view>
 		</view>
@@ -55,10 +59,13 @@
 					// 2.计算滑块滚动距离
 					left: 0
 				},
-				defaultConfig:{
+				scrollLeft: 0,// scrollView的横向滚动条位置
+				defaultConfig:{// 默认样式
+					textColor:'#333',//默认的字体颜色
+					activeTextColor:'#f94d2c',//高亮的字体颜色 
 					underLineWidth:24,
 					underLineHeight:2,
-					underLineColor: '#f94d2a',																																																					
+					underLineColor: '#f94d2a'																																													
 				}
 			};
 		},
@@ -101,6 +108,13 @@
 					.boundingClientRect((res)=>{
 						console.log(123);
 						console.log(res);
+						item._slider = {
+							// left = tabItem.left + (tabItem.width - slider.width)/2
+							left: res.left + ( res.width - this.defaultConfig.underLineWidth )/2,
+						}
+						if(data.length -1 === index){
+							this.tabToIndex();
+						}
 					})
 					.exec();
 				});                                                               
@@ -108,20 +122,31 @@
 			onTabClick(index){
 				// console.log(index)	
 				this.activeIndex = index;
+				this.tabToIndex();  
 				this.$emit('tabClick',index)
 			},
 			// 计算滑块滚动位置
 			tabToIndex(){
 				const index = this.activeIndex;
 				this.slider = {
-					left:0
-				}
+					left:this.tabList[this.activeIndex]._slider.left
+				};
+				// 控制scrollView进行横向的滚动
+				this.scrollLeft =this.activeIndex * this.defaultConfig.underLineWidth;
 			},
 			onLoad(){
 				console.log("this.tabData:",this.tabData);
 			}
 		},
 		watch:{
+			config:{
+				 // 父组件设置样式时，触发变化
+				 handler(val){
+					 // console.log("我是handler");
+					 this.defaultConfig = {...this.defaultConfig, ...val};
+				 },
+				 immediate: true
+			},
 			// 监听tabData的变化
 			tabData:{
 				handler(val){
@@ -144,19 +169,8 @@
 				},
 				// 侦听后立即执行
 				immediate: true
-			},
-			// // 监听tableData变化
-			// tabData:{
-			// 	handler(val){
-			// 		this.tabList = val;
-			// 		// this.$nextTick()存在兼容性问题
-			// 		setTimeout(()=>{
-			// 			// 计算item的slider
-			// 		},0)
-			// 	}
-			// }
+			}
 		}
-		
 	}
 </script>
 
@@ -196,7 +210,7 @@
 					width: 24px;
 					background-color: $uni-text-color-hot;
 					border-radius: 3px;
-					transition: .5s;
+					transition: 0.5s;
 					position: absolute;
 					bottom: 0;
 				}

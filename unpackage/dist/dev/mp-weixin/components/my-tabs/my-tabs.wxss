@@ -63,7 +63,7 @@
   width: 24px;
   background-color: #f94d2a;
   border-radius: 3px;
-  transition: .5s;
+  transition: 0.5s;
   position: absolute;
   bottom: 0;
 }
