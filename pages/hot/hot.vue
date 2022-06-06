@@ -32,10 +32,10 @@ import { getHotTabs } from 'api/hot'
 			async loadHotTabs(){
 				const { data:res } = await getHotTabs();// res = 返回值.data
 				this.tabData = res.list;
-				console.log("this.tabData:",this.tabData);
+				// console.log("this.tabData:",this.tabData);
 			},
 			test(text,index){
-				console.log("loadindex:",index);
+				// console.log("loadindex:",index);
 			}
 		},
 		components:{

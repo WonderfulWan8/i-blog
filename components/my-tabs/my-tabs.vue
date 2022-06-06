@@ -15,10 +15,13 @@
 				<view class="scoll-content">
 					<view class="tab-item-box">
 						<block v-for="(item, index) in tabData" :key="item.id">
-							<view @click="onTabClick(index)" class="tab-item">
-								<text :class="{'tab-item-active' : activeIndex === index }">
-									{{item.label || item}}
-								</text>
+							<view 
+							:id="'_tab_'+index" 
+							@click="onTabClick(index)" 
+							class="tab-item"
+							:class="{'tab-item-active' : activeIndex === index }"
+							>
+								{{item.label || item}}
 							</view>
 						</block>
 					</view>
@@ -26,7 +29,7 @@
 				<!-- 滑块 -->
 				<view class="underline" 
 				:style="{
-					transform: 'translateX('+ slider.left +'px)'
+					transform: 'translateX('+ slider.left +'px)',
 					width: defaultConfig.underLineWidth+'px',
 					height: defaultConfig.underLineHeight+'px',
 					backgroundColor: defaultConfig.underLineColor
@@ -55,7 +58,7 @@
 				defaultConfig:{
 					underLineWidth:24,
 					underLineHeight:2,
-					underLineColor: '#f94d2a'
+					underLineColor: '#f94d2a',																																																					
 				}
 			};
 		},
@@ -86,10 +89,24 @@
 		methods:{
 			// 更新tab的宽度
 			updateTabWidth(){
-				
+				let data = this.tabList;
+				if(data.length === 0){
+					return;
+				}
+				// 在uni中获取dom
+				const query = uni.createSelectorQuery().in(this);
+				data.forEach((item,index)=>{
+					// 获取dom固定写法
+					query.select('#_tab_'+index)
+					.boundingClientRect((res)=>{
+						console.log(123);
+						console.log(res);
+					})
+					.exec();
+				});                                                               
 			},
 			onTabClick(index){
-				console.log(index)	
+				// console.log(index)	
 				this.activeIndex = index;
 				this.$emit('tabClick',index)
 			},
@@ -99,9 +116,26 @@
 				this.slider = {
 					left:0
 				}
+			},
+			onLoad(){
+				console.log("this.tabData:",this.tabData);
 			}
 		},
 		watch:{
+			// 监听tabData的变化
+			tabData:{
+				handler(val){
+					console.log("监听tabdata发生变化");
+					this.tabList = val;
+					// tabList数据已经和tabData同步了
+					// 维护tabList中的每个item
+					// this.$nextTick在uniapp中存在兼容性问题
+					setTimeout(()=>{
+						// 计算item的slider
+						this.updateTabWidth();
+					},0)
+				}
+			},
 			// 监听父组件传值
 			defaultIndex:{
 				// 当defaultIndex发生变化时，回调的方法
@@ -111,16 +145,16 @@
 				// 侦听后立即执行
 				immediate: true
 			},
-			// 监听tableData变化
-			tabData:{
-				handler(val){
-					this.tabList = val;
-					// this.$nextTick()存在兼容性问题
-					setTimeout(()=>{
-						// 计算item的slider
-					},0)
-				}
-			}
+			// // 监听tableData变化
+			// tabData:{
+			// 	handler(val){
+			// 		this.tabList = val;
+			// 		// this.$nextTick()存在兼容性问题
+			// 		setTimeout(()=>{
+			// 			// 计算item的slider
+			// 		},0)
+			// 	}
+			// }
 		}
 		
 	}
