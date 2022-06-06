@@ -1,4 +1,6 @@
 import App from './App'
+// 引入公共样式
+import './styles/global.scss'
 
 // #ifndef VUE3
 import Vue from 'vue'

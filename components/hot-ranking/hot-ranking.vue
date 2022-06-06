@@ -1,7 +1,7 @@
 <template>
 	<view class="ranking-container">
 		<image class="ranking-bg" src="@/static/ranking-1.png" mode=""></image>
-		<text class="ranking-text">1</text>
+		<text class="ranking-text">{{ranking}}</text>
 	</view>
 </template>
 
@@ -12,6 +12,12 @@
 			return {
 				
 			};
+		},
+		props:{
+			ranking:{
+				type:Number,
+				required:true
+			}
 		}
 	}
 </script>
