@@ -106,8 +106,8 @@
 					// 获取dom固定写法
 					query.select('#_tab_'+index)
 					.boundingClientRect((res)=>{
-						console.log(123);
-						console.log(res);
+						// console.log(123);
+						// console.log(res);
 						item._slider = {
 							// left = tabItem.left + (tabItem.width - slider.width)/2
 							left: res.left + ( res.width - this.defaultConfig.underLineWidth )/2,
@@ -135,7 +135,7 @@
 				this.scrollLeft =this.activeIndex * this.defaultConfig.underLineWidth;
 			},
 			onLoad(){
-				console.log("this.tabData:",this.tabData);
+				// console.log("this.tabData:",this.tabData);
 			}
 		},
 		watch:{

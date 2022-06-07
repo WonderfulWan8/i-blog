@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["components/hot-list-item/hot-list-item"],{
 
 /***/ 52:
-/*!*******************************************************************!*\
-  !*** E:/uniapp/i-blog/components/hot-list-item/hot-list-item.vue ***!
-  \*******************************************************************/
+/*!************************************************************!*\
+  !*** E:/i-blog/components/hot-list-item/hot-list-item.vue ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -42,9 +42,9 @@ component.options.__file = "components/hot-list-item/hot-list-item.vue"
 /***/ }),
 
 /***/ 53:
-/*!**************************************************************************************************************!*\
-  !*** E:/uniapp/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=template&id=6d3c310a&scoped=true& ***!
-  \**************************************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** E:/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=template&id=6d3c310a&scoped=true& ***!
+  \*******************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -64,9 +64,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 54:
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/uniapp/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=template&id=6d3c310a&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=template&id=6d3c310a&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -80,7 +80,7 @@ var components
 try {
   components = {
     hotRanking: function() {
-      return __webpack_require__.e(/*! import() | components/hot-ranking/hot-ranking */ "components/hot-ranking/hot-ranking").then(__webpack_require__.bind(null, /*! @/components/hot-ranking/hot-ranking.vue */ 59))
+      return Promise.all(/*! import() | components/hot-ranking/hot-ranking */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/hot-ranking/hot-ranking")]).then(__webpack_require__.bind(null, /*! @/components/hot-ranking/hot-ranking.vue */ 59))
     }
   }
 } catch (e) {
@@ -114,9 +114,9 @@ render._withStripped = true
 /***/ }),
 
 /***/ 55:
-/*!********************************************************************************************!*\
-  !*** E:/uniapp/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** E:/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -130,9 +130,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 56:
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/uniapp/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -184,27 +184,14 @@ var _default =
     // 排名
     ranking: {
       type: Number,
-      required: true } },
-
-
-  computed: {
-    getRankingBg: function getRankingBg() {
-      if (this.ranking <= 3) {
-        var imgPath = "".concat(this.ranking, ").png");
-        return __webpack_require__(73)("./ranking-" + imgPath);
-        // let rank = await import(`@/static/ranking-${this.ranking}).png`)
-        // return rank
-      } else {
-        return __webpack_require__(/*! @/static/ranking-other.png */ 77);
-      }
-    } } };exports.default = _default;
+      required: true } } };exports.default = _default;
 
 /***/ }),
 
 /***/ 57:
-/*!*****************************************************************************************************************************!*\
-  !*** E:/uniapp/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=style&index=0&id=6d3c310a&lang=scss&scoped=true& ***!
-  \*****************************************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** E:/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=style&index=0&id=6d3c310a&lang=scss&scoped=true& ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -218,9 +205,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 58:
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/uniapp/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=style&index=0&id=6d3c310a&lang=scss&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/i-blog/components/hot-list-item/hot-list-item.vue?vue&type=style&index=0&id=6d3c310a&lang=scss&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

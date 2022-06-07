@@ -20,7 +20,7 @@
 					<text class="item-author">{{data.nickname}}</text>
 					<!-- 热度  -->
 					<view class="hot-box">
-						<image class="hot-icon" :src="getRankingBg" mode="scaleToFill"></image>
+						<image class="hot-icon" src="@/static/hot-icon.png" mode="scaleToFill"></image>
 						<text class="hot-text">{{data.views}}</text>
 					</view>
 				</view>
@@ -48,18 +48,7 @@
 				required:true
 			}
 		},
-		computed:{
-			getRankingBg(){
-				if(this.ranking <= 3){
-					const imgPath = `${this.ranking}).png`;
-					return require('@/static/ranking-'+imgPath)
-					// let rank = await import(`@/static/ranking-${this.ranking}).png`)
-					// return rank
-				}else{
-					return require(`@/static/ranking-other.png`)
-				}
-			}
-		}
+		
 	}
 </script>
 

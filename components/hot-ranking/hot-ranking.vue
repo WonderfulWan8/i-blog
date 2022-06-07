@@ -1,6 +1,6 @@
 <template>
 	<view class="ranking-container">
-		<image class="ranking-bg" src="@/static/ranking-1.png" mode=""></image>
+		<image class="ranking-bg" :src="getRankingBg" mode=""></image>
 		<text class="ranking-text">{{ranking}}</text>
 	</view>
 </template>
@@ -17,6 +17,19 @@
 			ranking:{
 				type:Number,
 				required:true
+			}
+		},
+		computed:{
+			getRankingBg(){
+				if(this.ranking <= 3){
+					// const imgPath = `${this.ranking}).png`;
+					// return require('@/static/ranking-'+imgPath)
+					// let rank = await import(`@/static/ranking-${this.ranking}).png`)
+					// return rank
+					return require(`@/static/ranking-${this.ranking}.png`)
+				}else{
+					return require(`@/static/ranking-other.png`)
+				}
 			}
 		}
 	}
